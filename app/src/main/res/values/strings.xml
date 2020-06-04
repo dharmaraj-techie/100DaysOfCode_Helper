@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">100DaysOfCode Helper</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment"><b><u>Two Main Rules</u></b> \n
+1.Code minimum an hour every day for the next 100 days.\n
+2.Tweet your progress every day with the #100DaysOfCode hashtag.
+\n\n
+        <b><u>Publicly commit to the challenge:</u></b>\n
+If you made the decision to commit to the challenge,make tweet to the world,  making yourself accountable and taking your resolve to the next level!</string>
 </resources>

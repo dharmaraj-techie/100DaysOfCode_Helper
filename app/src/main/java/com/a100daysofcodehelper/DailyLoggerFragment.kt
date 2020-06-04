@@ -12,7 +12,7 @@ import android.view.ViewGroup
  * its the fragment where user logs the content that he learnt on that day
  * it the home screen of this app
  */
-class DailyLogger : Fragment() {
+class DailyLoggerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

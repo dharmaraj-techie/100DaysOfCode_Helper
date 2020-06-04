@@ -9,7 +9,7 @@
     android:id="@+id/daily_logger_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.a100daysofcodehelper.DailyLogger"
+    android:name="com.a100daysofcodehelper.DailyLoggerFragment"
     />
 
 </FrameLayout>
