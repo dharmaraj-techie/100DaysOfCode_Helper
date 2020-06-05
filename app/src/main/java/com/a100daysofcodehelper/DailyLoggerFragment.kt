@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.a100daysofcodehelper.databinding.FragmentDailyLogerBinding
 import kotlinx.android.synthetic.main.fragment_daily_loger.*
 
 
@@ -23,17 +24,16 @@ class DailyLoggerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_daily_loger, container, false)
+        // Inflate the layout for this fragment using the binding class
+        val binding = FragmentDailyLogerBinding.inflate(inflater,container,false)
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        submit_btn.setOnClickListener(
+        //set a clickListener to the button to navigate to the logFragment
+        binding.submitBtn.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_dailyLoggerFragment_to_logFragment)
         )
+        return binding.root
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
