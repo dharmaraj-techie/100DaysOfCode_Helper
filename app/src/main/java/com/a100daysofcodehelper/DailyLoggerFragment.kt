@@ -34,10 +34,8 @@ class DailyLoggerFragment : Fragment() {
         //set a clickListener to the button to navigate to the logFragment
         binding.submitBtn.setOnClickListener {
             val logMessage: String = binding.dailyLogEditTv.text.toString()
-            Toast.makeText(context, logMessage, Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_dailyLoggerFragment_to_logFragment)
+            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
         }
-
         return binding.root
     }
 

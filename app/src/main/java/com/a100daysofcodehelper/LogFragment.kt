@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.a100daysofcodehelper.databinding.FragmentLogBinding
+import kotlinx.android.synthetic.main.fragment_log.*
 
 
 /**
@@ -17,7 +19,12 @@ class LogFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log, container, false)
+        val logFragmentBinding = FragmentLogBinding.inflate(inflater, container, false)
+        //get the passed argument
+        var args = LogFragmentArgs.fromBundle(requireArguments())
+        //set the textView by the String got from the argument
+        logFragmentBinding.dailyLogTv.text = args.dailyLog
+        return logFragmentBinding.root
     }
 
 }
