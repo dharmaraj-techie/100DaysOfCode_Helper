@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.a100daysofcodehelper.databinding.FragmentDailyLogerBinding
 import kotlinx.android.synthetic.main.fragment_daily_loger.*
 
@@ -18,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_daily_loger.*
  * it the home screen of this app
  */
 class DailyLoggerFragment : Fragment() {
+
+    private lateinit var binding: FragmentDailyLogerBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,12 +29,15 @@ class DailyLoggerFragment : Fragment() {
     ): View? {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment using the binding class
-        val binding = FragmentDailyLogerBinding.inflate(inflater,container,false)
+        binding = FragmentDailyLogerBinding.inflate(inflater, container, false)
 
         //set a clickListener to the button to navigate to the logFragment
-        binding.submitBtn.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_dailyLoggerFragment_to_logFragment)
-        )
+        binding.submitBtn.setOnClickListener {
+            val logMessage: String = binding.dailyLogEditTv.text.toString()
+            Toast.makeText(context, logMessage, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_dailyLoggerFragment_to_logFragment)
+        }
+
         return binding.root
     }
 
@@ -41,10 +48,7 @@ class DailyLoggerFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.about_menu ->
-                findNavController().navigate(R.id.action_dailyLoggerFragment_to_aboutFragment)
-        }
-        return super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(item, findNavController())
+                || super.onOptionsItemSelected(item)
     }
 }
