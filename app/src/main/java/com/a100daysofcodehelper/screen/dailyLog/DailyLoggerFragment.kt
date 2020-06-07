@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.a100daysofcodehelper.R
+import com.a100daysofcodehelper.dataBase.DailyLogDataBase
 import com.a100daysofcodehelper.databinding.FragmentDailyLogerBinding
 
 
@@ -30,8 +31,17 @@ class DailyLoggerFragment : Fragment() {
         // Inflate the layout for this fragment using the binding class
         binding = FragmentDailyLogerBinding.inflate(inflater, container, false)
 
+        //get a reference to the application context.
+        val application = requireNotNull(this.activity).application
+
+        //get a reference to the DAO of the database
+        val dataSource = DailyLogDataBase.getInstance(application).dailyLogDao
+
+        //create a viewModelFactory instance
+        val viewModelFactory = DailyLoggerViewModelFactory(dataSource, application)
+
         //create a viewModel Provider and let the binding class know about it
-        viewModel = ViewModelProvider(this).get(DailyLoggerViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DailyLoggerViewModel::class.java)
         binding.dailyLoggerViewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -41,6 +51,7 @@ class DailyLoggerFragment : Fragment() {
 //            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
             }
         })
+
 
         return binding.root
     }
