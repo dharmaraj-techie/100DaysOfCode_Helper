@@ -1,10 +1,12 @@
 package com.a100daysofcodehelper
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,8 @@ import kotlinx.android.synthetic.main.fragment_daily_loger.*
 class DailyLoggerFragment : Fragment() {
 
     private lateinit var binding: FragmentDailyLogerBinding
+    private lateinit var viewModel: DailyLoggerViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,10 +35,14 @@ class DailyLoggerFragment : Fragment() {
         // Inflate the layout for this fragment using the binding class
         binding = FragmentDailyLogerBinding.inflate(inflater, container, false)
 
+        viewModel = ViewModelProvider(this).get(DailyLoggerViewModel::class.java)
         //set a clickListener to the button to navigate to the logFragment
+
+        //when Submit button is clicked
         binding.submitBtn.setOnClickListener {
-            val logMessage: String = binding.dailyLogEditTv.text.toString()
-            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
+            viewModel.logMessage = binding.dailyLogEditTv.text.toString()
+            binding.todayLogTv.text = viewModel.logMessage
+//            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
         }
         return binding.root
     }
