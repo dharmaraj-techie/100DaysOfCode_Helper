@@ -1,4 +1,4 @@
-package com.a100daysofcodehelper.screen
+package com.a100daysofcodehelper.screen.dailyLog
 
 import android.os.Bundle
 import android.view.*

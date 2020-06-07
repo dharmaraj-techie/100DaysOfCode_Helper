@@ -6,7 +6,7 @@
     <data>
         <variable
             name="dailyLoggerViewModel"
-            type="com.a100daysofcodehelper.screen.DailyLoggerViewModel" />
+            type="com.a100daysofcodehelper.screen.dailyLog.DailyLoggerViewModel" />
     </data>
 
     <ScrollView
