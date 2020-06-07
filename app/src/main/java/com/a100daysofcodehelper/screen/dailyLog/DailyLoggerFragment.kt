@@ -18,7 +18,6 @@ import com.a100daysofcodehelper.databinding.FragmentDailyLogerBinding
  * it the home screen of this app
  */
 class DailyLoggerFragment : Fragment() {
-
     private lateinit var binding: FragmentDailyLogerBinding
     private lateinit var viewModel: DailyLoggerViewModel
 
@@ -48,10 +47,10 @@ class DailyLoggerFragment : Fragment() {
         viewModel.submitButtonPressed.observe(this.viewLifecycleOwner, Observer { isButtonPressed ->
             if (isButtonPressed) {
                 viewModel.updateDailyLog(binding.dailyLogEditTv.text.toString())
+                binding.dailyLogEditTv.text.clear()
 //            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
             }
         })
-
 
         return binding.root
     }

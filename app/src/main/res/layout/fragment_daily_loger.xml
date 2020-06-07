@@ -63,18 +63,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Today's Log"
+                android:text="Last Log"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
 
             <TextView
-                android:id="@+id/todayLogTv"
+                android:id="@+id/lastLogDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{dailyLoggerViewModel.todayLog.date}"
                 app:layout_constraintStart_toStartOf="@+id/todays_log_title_tv"
-                app:layout_constraintTop_toBottomOf="@+id/todays_log_title_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/todays_log_title_tv"
+                tools:text="Date" />
+            <TextView
+                android:id="@+id/lastLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{dailyLoggerViewModel.todayLog.log}"
+                app:layout_constraintStart_toStartOf="@+id/lastLogDate"
+                app:layout_constraintTop_toBottomOf="@+id/lastLogDate"
+                tools:text="Date" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

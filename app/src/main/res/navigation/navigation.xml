@@ -22,9 +22,5 @@
         android:id="@+id/logFragment"
         android:name="com.a100daysofcodehelper.screen.LogFragment"
         android:label="fragment_log"
-        tools:layout="@layout/fragment_log" >
-        <argument
-            android:name="dailyLog"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_log" />
 </navigation>

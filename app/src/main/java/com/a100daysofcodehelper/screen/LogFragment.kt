@@ -20,10 +20,6 @@ class LogFragment : Fragment() {
         // Inflate the layout for this fragment
         val logFragmentBinding = FragmentLogBinding.inflate(inflater, container, false)
         //get the passed argument
-        val args =
-            LogFragmentArgs.fromBundle(requireArguments())
-        //set the textView by the String got from the argument
-        logFragmentBinding.dailyLogTv.text = args.dailyLog
         return logFragmentBinding.root
     }
 
