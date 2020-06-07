@@ -1,14 +1,13 @@
 package com.a100daysofcodehelper.screen.dailyLog
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.a100daysofcodehelper.dataBase.DailyLog
 import com.a100daysofcodehelper.dataBase.DailyLogDao
+import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DailyLoggerViewModel(val database: DailyLogDao,
@@ -27,13 +26,50 @@ class DailyLoggerViewModel(val database: DailyLogDao,
     val submitButtonPressed :LiveData<Boolean>
             get() = _submitButtonPressed
 
+    private var viewModelJob = Job()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
+
+    private var _todayLog = MutableLiveData<DailyLog?>()
+    val todayLog : LiveData<DailyLog?>
+        get() = _todayLog
+
+
+    private val logs = database.getAllLogs()
+
     init {
         _logMessage.value = "No Logs yet today"
         _submitButtonPressed.value = false
+        initializeTonight()
+    }
+
+    private fun initializeTonight() {
+        uiScope.launch {
+            _todayLog.value = getTodayLogFromDatabase()
+        }
+    }
+
+    private suspend fun getTodayLogFromDatabase(): DailyLog? {
+        return withContext(Dispatchers.IO) {
+            database.getLastLog()
+        }
     }
 
     fun submitPressed(){
         _submitButtonPressed.value = true
+        uiScope.launch {
+            val dailyLog = DailyLog()
+            dailyLog.log = _logMessage.value.toString()
+            dailyLog.date = SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().time)
+            insert(dailyLog)
+            _todayLog.value = getTodayLogFromDatabase()
+        }
+    }
+
+    private suspend fun insert(dailyLog: DailyLog){
+        withContext(Dispatchers.IO) {
+            database.insert(dailyLog)
+        }
     }
 
     /**
@@ -41,5 +77,10 @@ class DailyLoggerViewModel(val database: DailyLogDao,
      */
     fun updateDailyLog(dailyLog: String){
         _logMessage.value = dailyLog
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }

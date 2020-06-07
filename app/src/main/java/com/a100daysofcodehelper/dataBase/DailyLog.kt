@@ -8,12 +8,12 @@ import java.util.*
 @Entity(tableName = "daily_log_table")
 data class DailyLog(
                     @PrimaryKey(autoGenerate = true)
-                    val id : Long,
+                    val id : Long = 0L,
 
                     @ColumnInfo(name = "daily_log")
-                    val log:String = "",
+                    var log:String = "",
 
                     @ColumnInfo(name = "date")
-                    val date: String = "") {
+                    var date: String = "") {
 
 }
