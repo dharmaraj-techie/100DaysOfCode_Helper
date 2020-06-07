@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -38,10 +39,13 @@ class DailyLoggerFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DailyLoggerViewModel::class.java)
         //set a clickListener to the button to navigate to the logFragment
 
+        viewModel.logMessage.observe(viewLifecycleOwner, Observer {
+            binding.todayLogTv.text = it
+        })
+
         //when Submit button is clicked
         binding.submitBtn.setOnClickListener {
-            viewModel.logMessage = binding.dailyLogEditTv.text.toString()
-            binding.todayLogTv.text = viewModel.logMessage
+            viewModel.logMessage.value = binding.dailyLogEditTv.text.toString()
 //            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
         }
         return binding.root
