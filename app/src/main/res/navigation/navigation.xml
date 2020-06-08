@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dailyLoggerFragment"
-        android:name="com.a100daysofcodehelper.screen.dailyLog.DailyLoggerFragment"
+        android:name="com.a100daysofcodehelper.screen.dailyLogger.DailyLoggerFragment"
         android:label="DailyLoggerFragment" >
         <action
             android:id="@+id/action_dailyLoggerFragment_to_logFragment"
@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/logFragment"
-        android:name="com.a100daysofcodehelper.screen.LogFragment"
+        android:name="com.a100daysofcodehelper.screen.logsList.LogFragment"
         android:label="fragment_log"
         tools:layout="@layout/fragment_log" />
 </navigation>

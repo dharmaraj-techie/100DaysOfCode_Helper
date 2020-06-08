@@ -1,9 +1,8 @@
-package com.a100daysofcodehelper.screen.dailyLog
+package com.a100daysofcodehelper.screen.dailyLogger
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.a100daysofcodehelper.dataBase.DailyLog
 import com.a100daysofcodehelper.dataBase.DailyLogDao
 
 class DailyLoggerViewModelFactory(private val dataSource: DailyLogDao,
