@@ -1,4 +1,4 @@
-package com.a100daysofcodehelper.screen
+package com.a100daysofcodehelper.screen.about
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

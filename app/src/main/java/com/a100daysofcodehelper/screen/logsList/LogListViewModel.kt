@@ -9,7 +9,8 @@ import com.a100daysofcodehelper.dataBase.DailyLog
 import com.a100daysofcodehelper.dataBase.DailyLogDao
 import kotlinx.coroutines.*
 
-class LogViewModel(
+
+class LogListViewModel(
     val database: DailyLogDao
 ) : ViewModel() {
 
@@ -26,9 +27,16 @@ class LogViewModel(
 
     private fun initialiseLogList() {
         uiScope.launch {
-             withContext(Dispatchers.IO) {
-                 _logList.value = database.getAllLogs()
-            }
+            _logList.value = getLogListFromDataBase()
         }
     }
+
+    private suspend fun getLogListFromDataBase(): List<DailyLog>? {
+        return withContext(Dispatchers.IO) {
+             database.getAllLogs()
+        }
+    }
+
+
+
 }

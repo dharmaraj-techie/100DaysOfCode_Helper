@@ -35,8 +35,6 @@ class DailyLoggerViewModel(val database: DailyLogDao,
         get() = _todayLog
 
 
-    private val logs = database.getAllLogs()
-
     init {
         _logMessage.value = "No Logs yet today"
         _submitButtonPressed.value = false

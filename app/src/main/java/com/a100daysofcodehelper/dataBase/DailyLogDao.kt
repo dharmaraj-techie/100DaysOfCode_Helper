@@ -13,7 +13,7 @@ interface DailyLogDao{
     fun insert(dailyLog: DailyLog)
 
     @Query("SELECT * FROM daily_log_table ORDER BY id DESC")
-    fun getAllLogs(): LiveData<List<DailyLog>>
+    fun getAllLogs(): List<DailyLog>
 
     @Query("SELECT * FROM daily_log_table ORDER BY id DESC LIMIT 1")
     fun getLastLog(): DailyLog?

@@ -15,12 +15,12 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.a100daysofcodehelper.screen.AboutFragment"
+        android:name="com.a100daysofcodehelper.screen.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/logFragment"
-        android:name="com.a100daysofcodehelper.screen.logsList.LogFragment"
+        android:name="com.a100daysofcodehelper.screen.logsList.LogListFragment"
         android:label="fragment_log"
         tools:layout="@layout/fragment_log" />
 </navigation>
