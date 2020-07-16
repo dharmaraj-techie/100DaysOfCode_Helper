@@ -24,10 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/roboto_thin"
                 android:text="What did you code today?"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp"
+                android:textSize="24sp"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +36,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:fontFamily="@font/roboto_thin"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/roboto_thin"
                 android:onClick="@{() -> dailyLoggerViewModel.submitPressed()}"
                 android:text="Submit"
                 app:layout_constraintEnd_toEndOf="@+id/daily_log_edit_tv"
@@ -63,6 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:text="Last Log"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
