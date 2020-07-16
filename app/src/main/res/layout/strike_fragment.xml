@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
      android:layout_width="match_parent">
 
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddBtn"
@@ -12,7 +16,7 @@
         android:layout_margin="16dp"
         android:layout_gravity="bottom|end"
         android:clickable="true"
-        android:src="@drawable/ic_baseline_add_24" />
-
+        android:src="@drawable/ic_baseline_add_24"
+        android:focusable="true" />
 
 </FrameLayout>
