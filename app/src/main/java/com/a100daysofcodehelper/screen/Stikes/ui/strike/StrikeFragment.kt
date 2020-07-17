@@ -30,7 +30,7 @@ class StrikeFragment : Fragment() {
             findNavController().navigate(StrikeFragmentDirections.actionStrikeFragmentToDailyLoggerFragment())
         })
 
-        calendarView.selectedDates = getSelectedDays()
+        binding.calendarView.selectedDates = getSelectedDays()
         return binding.root
     }
 
