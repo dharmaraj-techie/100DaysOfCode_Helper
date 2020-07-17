@@ -25,7 +25,7 @@
         tools:layout="@layout/fragment_log" />
     <fragment
         android:id="@+id/strikeFragment"
-        android:name="com.a100daysofcodehelper.screen.Stikes.ui.strike.StrikeFragment"
+        android:name="com.a100daysofcodehelper.screen.strike.StrikeFragment"
         android:label="StrikeFragment" >
         <action
             android:id="@+id/action_strikeFragment_to_dailyLoggerFragment"

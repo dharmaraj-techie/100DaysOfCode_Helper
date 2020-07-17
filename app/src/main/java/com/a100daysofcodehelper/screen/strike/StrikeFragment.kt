@@ -1,4 +1,4 @@
-package com.a100daysofcodehelper.screen.Stikes.ui.strike
+package com.a100daysofcodehelper.screen.strike
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.a100daysofcodehelper.R
-import com.a100daysofcodehelper.databinding.DailyLogListItemBinding
 import com.a100daysofcodehelper.databinding.FragmentStrikeBinding
-import kotlinx.android.synthetic.main.fragment_strike.*
 import java.util.*
 
 class StrikeFragment : Fragment() {
 
     private lateinit var viewModel: StrikeViewModel
     private lateinit var binding: FragmentStrikeBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,23 +22,22 @@ class StrikeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(StrikeViewModel::class.java)
         binding = FragmentStrikeBinding.inflate(inflater,container,false)
 
-        binding.fabAddBtn.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(StrikeFragmentDirections.actionStrikeFragmentToDailyLoggerFragment())
+        binding.strikeViewModel = viewModel
+
+        binding.lifecycleOwner = this
+
+        //Add button is pressed we need to navigate to the dailyLogger activity
+        viewModel.isAddBtnPressed.observe(this.viewLifecycleOwner, androidx.lifecycle.Observer { isPressed ->
+            if(isPressed){
+                findNavController().navigate(StrikeFragmentDirections.actionStrikeFragmentToDailyLoggerFragment())
+                viewModel.navigatedToDailyLogger()
+            }
         })
 
-        binding.calendarView.selectedDates = getSelectedDays()
+//        binding.calendarView.selectedDates = viewModel.getSelectedDays()
         return binding.root
     }
 
 
-    private fun getSelectedDays(): List<Calendar> {
-        val calendars: MutableList<Calendar> =
-            ArrayList()
-        for (i in 0..9) {
-            val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DAY_OF_MONTH, i)
-            calendars.add(calendar)
-        }
-        return calendars
-    }
+
 }
