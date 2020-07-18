@@ -19,7 +19,7 @@
             app:selectionColor="@color/colorPrimaryDark"
             app:selectionDisabled="true"
             app:selectionLabelColor="#ffff"
-            app:setSelectedDates="@{strikeViewModel.selectedDays}"
+            app:setSelectedDates="@{strikeViewModel.selectedDates}"
             app:type="many_days_picker" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

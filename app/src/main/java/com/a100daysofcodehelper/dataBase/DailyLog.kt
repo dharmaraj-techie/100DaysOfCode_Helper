@@ -15,5 +15,4 @@ data class DailyLog(
 
                     @ColumnInfo(name = "date")
                     var date: String = "") {
-
 }
