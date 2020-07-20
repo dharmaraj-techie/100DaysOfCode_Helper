@@ -45,7 +45,6 @@ class DailyLoggerViewModel(val database: DailyLogDao,
     private fun initializeTonight() {
         uiScope.launch {
             _todayLog.value = getTodayLogFromDatabase()
-
         }
     }
 

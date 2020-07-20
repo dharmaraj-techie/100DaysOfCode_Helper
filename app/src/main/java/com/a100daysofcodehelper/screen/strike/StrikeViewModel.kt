@@ -1,6 +1,5 @@
 package com.a100daysofcodehelper.screen.strike
 
-import android.app.Application
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,10 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.a100daysofcodehelper.dataBase.DailyLog
 import com.a100daysofcodehelper.dataBase.DailyLogDao
-import com.a100daysofcodehelper.getFakeData
-import com.a100daysofcodehelper.getSelectedDays
-import com.a100daysofcodehelper.screen.dailyLogger.DailyLoggerViewModel
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class StrikeViewModel(val database: DailyLogDao) : ViewModel() {
@@ -21,40 +18,26 @@ class StrikeViewModel(val database: DailyLogDao) : ViewModel() {
     val isAddBtnPressed:LiveData<Boolean>
         get() = _isAddBtnPressed
 
-    //List of selected Dated
-    private val _selectedDates = MutableLiveData<List<Calendar>>()
-    val selectedDates:LiveData<List<Calendar>>
-        get() = _selectedDates
-
-
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main +  viewModelJob)
 
+    val selectedDates = database.getAllLogDates()
 
     init {
         _isAddBtnPressed.value = false
-        _selectedDates.value = getSelectedDays()
-        insertFakeData()
-    }
-//insert fake data for testing
-
-    private fun insertFakeData() {
-        uiScope.launch {
-            val fakeData = getFakeData()
-            withContext(Dispatchers.IO){
-                val data = fakeData.map {
-                    DailyLog(log = it.log,
-                        date = it.date
-                    )
-                }.toTypedArray()
-                database.insertAll(*data)
-            }
-        }
     }
 
-    fun selectedDates(){
-        uiScope.launch {
+
+
+    fun getFakeSelectedDays(): List<Calendar> {
+        val calendars: MutableList<Calendar> =
+            ArrayList()
+        for (i in 0..9) {
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_MONTH, i)
+            calendars.add(calendar)
         }
+        return calendars
     }
 
     fun onAddButtonPressed(){
@@ -69,10 +52,7 @@ class StrikeViewModel(val database: DailyLogDao) : ViewModel() {
         super.onCleared()
         viewModelJob.cancel()
     }
-
 }
-
-
 
 
 class StrikeViewModelFactory(private val dataSource: DailyLogDao
@@ -84,10 +64,4 @@ class StrikeViewModelFactory(private val dataSource: DailyLogDao
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-/**
- * Binding adapter to set the selected dates in the calendar view
- */
-@BindingAdapter("setSelectedDates")
-fun setSelectedDates(materialCardView: com.applandeo.materialcalendarview.CalendarView, dates: List<Calendar>){
-    materialCardView.selectedDates = dates
-}
+
