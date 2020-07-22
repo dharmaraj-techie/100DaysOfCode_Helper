@@ -27,6 +27,8 @@ import java.util.*
  * Binding adapter to set the selected dates in the calendar view
  */
 @BindingAdapter("setSelectedDates")
-fun setSelectedDates(materialCardView: com.applandeo.materialcalendarview.CalendarView, dates: List<Calendar>){
-    materialCardView.selectedDates = dates
+fun setSelectedDates(materialCardView: com.applandeo.materialcalendarview.CalendarView, dates: List<Calendar>?){
+    if(!dates.isNullOrEmpty()){
+        materialCardView.selectedDates = dates
+    }
 }

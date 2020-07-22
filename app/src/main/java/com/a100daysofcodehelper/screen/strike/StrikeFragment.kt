@@ -38,10 +38,6 @@ class StrikeFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        viewModel.selectedDates.observe(this.viewLifecycleOwner, androidx.lifecycle.Observer { StringList->
-            Toast.makeText(this.context, StringList[1],Toast.LENGTH_SHORT).show()
-        })
-
         //Add button is pressed we need to navigate to the dailyLogger activity
         viewModel.isAddBtnPressed.observe(this.viewLifecycleOwner, androidx.lifecycle.Observer { isPressed ->
             if(isPressed){

@@ -20,7 +20,7 @@
             app:selectionDisabled="true"
             app:selectionLabelColor="#ffff"
             app:type="many_days_picker"
-            app:setSelectedDates="@{strikeViewModel.fakeSelectedDays}"
+            app:setSelectedDates="@{strikeViewModel.selectedDaysList}"
             />
 
 

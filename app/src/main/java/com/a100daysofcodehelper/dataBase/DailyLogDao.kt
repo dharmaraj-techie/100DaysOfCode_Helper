@@ -19,6 +19,6 @@ interface DailyLogDao{
     fun getLastLog(): DailyLog?
 
     @Query("SELECT date FROM daily_log_table")
-    fun getAllLogDates(): LiveData<List<String>>
+    fun getAllLogDates(): List<String?>
 
 }
