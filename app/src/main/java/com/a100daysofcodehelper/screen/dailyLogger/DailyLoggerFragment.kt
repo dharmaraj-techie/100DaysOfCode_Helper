@@ -51,7 +51,6 @@ class DailyLoggerFragment : Fragment() {
 //            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
             }
         })
-
         return binding.root
     }
 

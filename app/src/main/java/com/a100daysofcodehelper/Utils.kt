@@ -1,7 +1,11 @@
 package com.a100daysofcodehelper
 
+import android.util.Log
 import androidx.databinding.BindingAdapter
 import com.a100daysofcodehelper.dataBase.DailyLog
+import com.a100daysofcodehelper.dataBase.DailyLogDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,7 +24,24 @@ import java.util.*
 //    return dailyLogs
 //}
 
+suspend fun getListOfDatesFromDb(database : DailyLogDao): List<Calendar>?{
+    return withContext(Dispatchers.IO) {
+        val listOfDatesAsString = database.getAllLogDates()
+        val calendars: MutableList<Calendar>? =
+            ArrayList()
 
+        for(dateString in listOfDatesAsString){
+            val calendar = Calendar.getInstance()
+            val sdf = SimpleDateFormat("MM/dd/yyyy")
+            if (!dateString.isNullOrEmpty()) {
+                calendar.time = sdf.parse(dateString)
+                Log.d("StrikeViewModel :", calendar.toString())
+                calendars?.add(calendar)
+            }
+        }
+        calendars
+    }
+}
 
 
 /**
