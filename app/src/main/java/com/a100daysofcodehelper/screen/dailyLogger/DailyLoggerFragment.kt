@@ -1,5 +1,7 @@
 package com.a100daysofcodehelper.screen.dailyLogger
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -46,12 +48,22 @@ class DailyLoggerFragment : Fragment() {
 
         viewModel.submitButtonPressed.observe(this.viewLifecycleOwner, Observer { isButtonPressed ->
             if (isButtonPressed) {
-                viewModel.updateDailyLog(binding.dailyLogEditTv.text.toString())
+                val logMessage = binding.dailyLogEditTv.text.toString()
+                viewModel.updateDailyLog(logMessage)
+                tweet(logMessage)
                 binding.dailyLogEditTv.text.clear()
 //            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
             }
         })
         return binding.root
+    }
+
+    private fun tweet(tweetMsg: String) {
+        val tweetUrl =
+            ("https://twitter.com/intent/tweet?text=$tweetMsg &hashtags="
+                    + "100DaysOfCode")
+        val uri: Uri = Uri.parse(tweetUrl)
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

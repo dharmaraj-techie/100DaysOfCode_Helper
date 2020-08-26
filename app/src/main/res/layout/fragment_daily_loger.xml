@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="dailyLoggerViewModel"
             type="com.a100daysofcodehelper.screen.dailyLogger.DailyLoggerViewModel" />
@@ -20,13 +21,13 @@
 
             <TextView
                 android:id="@+id/textView"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="What did you code today?"
                 android:textSize="24sp"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,21 +50,20 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:onClick="@{() -> dailyLoggerViewModel.submitPressed()}"
-                android:enabled="@{dailyLoggerViewModel.submitButtonVisibility}"
-                android:text="Submit"
+                android:text="Submit and Tweet"
                 app:layout_constraintEnd_toEndOf="@+id/daily_log_edit_tv"
                 app:layout_constraintTop_toBottomOf="@+id/daily_log_edit_tv" />
-
+            <!--                android:enabled="@{dailyLoggerViewModel.submitButtonVisibility}"-->
 
             <TextView
                 android:id="@+id/todays_log_title_tv"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:text="Last Log"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
 
@@ -76,6 +76,7 @@
                 app:layout_constraintStart_toStartOf="@+id/todays_log_title_tv"
                 app:layout_constraintTop_toBottomOf="@+id/todays_log_title_tv"
                 tools:text="Date" />
+
             <TextView
                 android:id="@+id/lastLog"
                 android:layout_width="wrap_content"
@@ -85,6 +86,7 @@
                 app:layout_constraintStart_toStartOf="@+id/lastLogDate"
                 app:layout_constraintTop_toBottomOf="@+id/lastLogDate"
                 tools:text="Date" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

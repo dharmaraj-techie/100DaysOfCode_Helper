@@ -49,8 +49,6 @@ class DailyLoggerViewModel(
     }
 
     private fun initializeRecentLog() {
-        //set the visibility of submit button based on today's log submitted or not
-//        _submitButtonVisibility.value = !checkLastLogDateIsToday()
         uiScope.launch {
             _lastLog.value = getRecentLogFromDatabase()
         }
@@ -75,7 +73,6 @@ class DailyLoggerViewModel(
             _lastLog.value = getRecentLogFromDatabase()
         }
     }
-
 
     private suspend fun insert(dailyLog: DailyLog) {
         withContext(Dispatchers.IO) {
