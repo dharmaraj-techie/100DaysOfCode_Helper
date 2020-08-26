@@ -2,37 +2,29 @@ package com.a100daysofcodehelper.screen.dailyLogger
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.a100daysofcodehelper.dataBase.DailyLog
 import com.a100daysofcodehelper.dataBase.DailyLogDao
+import com.a100daysofcodehelper.getTodayDateString
 import kotlinx.coroutines.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class DailyLoggerViewModel(
     val database: DailyLogDao,
-     application: Application
+    application: Application
 ) : AndroidViewModel(application) {
 
     //observe the daily Log messages
-    // for internal use
     private val _logMessage = MutableLiveData<String>()
-
-    //for external use
     val logMessage: LiveData<String>
         get() = _logMessage
 
     //to handle submit button clicks
-    // for internal use
     private val _submitButtonPressed = MutableLiveData<Boolean>()
-
-    //for external use
     val submitButtonPressed: LiveData<Boolean>
         get() = _submitButtonPressed
-
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -42,20 +34,32 @@ class DailyLoggerViewModel(
     val lastLog: LiveData<DailyLog?>
         get() = _lastLog
 
+    /**
+     * make the submit button disabled when the today's log has been entered preventing from additional entries
+     */
+    val submitButtonVisibility = Transformations.map(_lastLog){lastLog ->
+        Log.d("DailyLoggerViewModel", "true LastLog date: ${lastLog?.date}  Today's Date: ${getTodayDateString()} \"")
+        lastLog?.date != getTodayDateString()
+    }
 
     init {
         _logMessage.value = "No Logs yet today"
         _submitButtonPressed.value = false
-        initializeTonight()
+        initializeRecentLog()
     }
 
-    private fun initializeTonight() {
+    private fun initializeRecentLog() {
+        //set the visibility of submit button based on today's log submitted or not
+//        _submitButtonVisibility.value = !checkLastLogDateIsToday()
         uiScope.launch {
-            _lastLog.value = getTodayLogFromDatabase()
+            _lastLog.value = getRecentLogFromDatabase()
         }
     }
 
-    private suspend fun getTodayLogFromDatabase(): DailyLog? {
+    /**
+     * @returns the last entered(i.e recent) Log
+     */
+    private suspend fun getRecentLogFromDatabase(): DailyLog? {
         return withContext(Dispatchers.IO) {
             database.getLastLog()
         }
@@ -64,30 +68,14 @@ class DailyLoggerViewModel(
     fun submitPressed() {
         _submitButtonPressed.value = true
         uiScope.launch {
-
-            if(checkLastLogDateIsToday()){
-               Log.d(" DailyLoggerViewModel","##################################You have already entered Today's Log")
-            }else{
-                val dailyLog = DailyLog()
-                dailyLog.log = _logMessage.value.toString()
-                dailyLog.date = getTodayDateString()
-                insert(dailyLog)
-                _lastLog.value = getTodayLogFromDatabase()
-            }
+            val dailyLog = DailyLog()
+            dailyLog.log = _logMessage.value.toString()
+            dailyLog.date = getTodayDateString()
+            insert(dailyLog)
+            _lastLog.value = getRecentLogFromDatabase()
         }
     }
 
-    private fun getTodayDateString() =
-        SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().time)
-
-    private fun checkLastLogDateIsToday(): Boolean {
-        val lastLog = _lastLog.value
-        return if (lastLog != null) {
-            val lastLogDate = lastLog.date
-            getTodayDateString() == lastLogDate
-        } else
-            false
-    }
 
     private suspend fun insert(dailyLog: DailyLog) {
         withContext(Dispatchers.IO) {

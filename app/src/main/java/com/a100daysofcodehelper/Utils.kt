@@ -43,6 +43,13 @@ suspend fun getListOfDatesFromDb(database : DailyLogDao): List<Calendar>?{
     }
 }
 
+/**
+ * Returns the Today day in the MM/dd/yyyy" format
+ * @return Today's date as String
+ */
+ fun getTodayDateString() =
+    SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().time)
+
 
 /**
  * Binding adapter to set the selected dates in the calendar view
