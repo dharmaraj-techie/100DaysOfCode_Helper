@@ -21,14 +21,14 @@
             app:headerLabelColor="@color/primaryTextColor"
             app:selectionDisabled="true"
             app:previousButtonSrc="@drawable/ic_previous_arrow_24"
-            app:selectionColor="@color/secondaryColor"
+            app:selectionColor="@color/accentLightColor"
             app:selectionLabelColor="@color/secondaryTextColor"
             app:type="many_days_picker"
             app:setSelectedDates="@{strikeViewModel.selectedDaysList}" />
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddBtn"
+            android:src="@drawable/ic_baseline_add_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -36,7 +36,6 @@
             android:onClick="@{()->strikeViewModel.onAddButtonPressed()}"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/ic_baseline_add_24" />
-
+            app:backgroundTint="@color/accentColor" />
     </FrameLayout>
 </layout>

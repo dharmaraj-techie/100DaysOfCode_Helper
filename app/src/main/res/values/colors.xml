@@ -10,6 +10,11 @@
 
     <color name="secondaryLightColor">#8559da</color>
 
+    <color name="accentColor">#ffea00</color>
+
+    <color name="accentLightColor">#ffff56</color>
+
+    <color name="accentDarkColor">#c7b800</color>
 
     <color name="primaryTextColor">#000000</color>
 
@@ -17,22 +22,22 @@
 
 </resources>
 
-    <!--<resources>-->
+    <!--    <resources>-->
 
-    <!--<color name="primaryColor">#512da8</color>-->
+    <!--    <color name="primaryColor">#512da8</color>-->
 
-    <!--<color name="primaryLightColor">#8559da</color>-->
+    <!--    <color name="primaryLightColor">#8559da</color>-->
 
-    <!--<color name="primaryDarkColor">#140078</color>-->
+    <!--    <color name="primaryDarkColor">#140078</color>-->
 
-    <!--<color name="secondaryColor">#ffea00</color>-->
+    <!--    <color name="secondaryColor">#ffea00</color>-->
 
-    <!--<color name="secondaryLightColor">#ffff56</color>-->
+    <!--    <color name="secondaryLightColor">#ffff56</color>-->
 
-    <!--<color name="secondaryDarkColor">#c7b800</color>-->
+    <!--    <color name="secondaryDarkColor">#c7b800</color>-->
 
-    <!--<color name="primaryTextColor">#ffffff</color>-->
+    <!--    <color name="primaryTextColor">#ffffff</color>-->
 
-    <!--<color name="secondaryTextColor">#000000</color>-->
+    <!--    <color name="secondaryTextColor">#000000</color>-->
 
-    <!--</resources>-->
+    <!--    </resources>-->
