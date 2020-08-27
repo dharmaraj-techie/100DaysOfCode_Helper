@@ -21,7 +21,7 @@
             app:headerLabelColor="@color/primaryTextColor"
             app:selectionDisabled="true"
             app:previousButtonSrc="@drawable/ic_previous_arrow_24"
-            app:selectionColor="@color/accentLightColor"
+            app:selectionColor="@color/secondaryLightColor"
             app:selectionLabelColor="@color/secondaryTextColor"
             app:type="many_days_picker"
             app:setSelectedDates="@{strikeViewModel.selectedDaysList}" />
@@ -36,6 +36,6 @@
             android:onClick="@{()->strikeViewModel.onAddButtonPressed()}"
             android:clickable="true"
             android:focusable="true"
-            app:backgroundTint="@color/accentColor" />
+            app:backgroundTint="@color/secondaryColor" />
     </FrameLayout>
 </layout>
