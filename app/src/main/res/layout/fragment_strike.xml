@@ -16,12 +16,15 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:selectionColor="@color/colorPrimaryDark"
+            app:forwardButtonSrc="@drawable/ic_forward_arrow_right_24"
+            app:headerColor="@color/primaryColor"
+            app:headerLabelColor="@color/primaryTextColor"
             app:selectionDisabled="true"
-            app:selectionLabelColor="#ffff"
+            app:previousButtonSrc="@drawable/ic_previous_arrow_24"
+            app:selectionColor="@color/secondaryColor"
+            app:selectionLabelColor="@color/secondaryTextColor"
             app:type="many_days_picker"
-            app:setSelectedDates="@{strikeViewModel.selectedDaysList}"
-            />
+            app:setSelectedDates="@{strikeViewModel.selectedDaysList}" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
