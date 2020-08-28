@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="dailyLoggerViewModel"
             type="com.a100daysofcodehelper.screen.dailyLogger.DailyLoggerViewModel" />
@@ -52,7 +51,7 @@
                 android:background="@color/secondaryColor"
                 android:padding="8dp"
                 android:textColor="@color/secondaryTextColor"
-                android:onClick="@{() -> dailyLoggerViewModel.submitPressed()}"
+                android:onClick="@{()-> dailyLoggerViewModel.submitPressed()}"
                 android:text="Submit and Tweet"
                 app:layout_constraintEnd_toEndOf="@+id/daily_log_edit_tv"
                 app:layout_constraintTop_toBottomOf="@+id/daily_log_edit_tv" />

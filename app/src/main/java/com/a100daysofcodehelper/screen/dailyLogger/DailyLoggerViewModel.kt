@@ -22,9 +22,19 @@ class DailyLoggerViewModel(
         get() = _logMessage
 
     //to handle submit button clicks
-    private val _submitButtonPressed = MutableLiveData<Boolean>()
-    val submitButtonPressed: LiveData<Boolean>
-        get() = _submitButtonPressed
+    private val _eventSubmit = MutableLiveData<Boolean>()
+    val eventSubmit: LiveData<Boolean>
+        get() = _eventSubmit
+
+    //to error msg
+    private val _eventEmptyLog = MutableLiveData<Boolean>()
+    val eventEmptyLog: LiveData<Boolean>
+        get() = _eventSubmit
+
+    //to error msg
+    private val _eventTweet = MutableLiveData<Boolean>()
+    val eventTweet: LiveData<Boolean>
+        get() = _eventTweet
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -37,14 +47,19 @@ class DailyLoggerViewModel(
     /**
      * make the submit button disabled when the today's log has been entered preventing from additional entries
      */
-    val submitButtonVisibility = Transformations.map(_lastLog){lastLog ->
-        Log.d("DailyLoggerViewModel", "true LastLog date: ${lastLog?.date}  Today's Date: ${getTodayDateString()} \"")
+    val submitButtonVisibility = Transformations.map(_lastLog) { lastLog ->
+        Log.d(
+            "DailyLoggerViewModel",
+            "true LastLog date: ${lastLog?.date}  Today's Date: ${getTodayDateString()} \""
+        )
         lastLog?.date != getTodayDateString()
     }
 
     init {
         _logMessage.value = "No Logs yet today"
-        _submitButtonPressed.value = false
+        _eventSubmit.value = false
+        _eventEmptyLog.value = false
+        _eventTweet.value = false
         initializeRecentLog()
     }
 
@@ -64,13 +79,20 @@ class DailyLoggerViewModel(
     }
 
     fun submitPressed() {
-        _submitButtonPressed.value = true
-        uiScope.launch {
-            val dailyLog = DailyLog()
-            dailyLog.log = _logMessage.value.toString()
-            dailyLog.date = getTodayDateString()
-            insert(dailyLog)
-            _lastLog.value = getRecentLogFromDatabase()
+        val currentLogMessage = _logMessage.value.toString()
+        if (currentLogMessage.isBlank()) {
+            _eventEmptyLog.value = true
+            _eventSubmit.value = false
+        } else {
+            uiScope.launch {
+                _eventEmptyLog.value = false
+                val dailyLog = DailyLog()
+                dailyLog.log = _logMessage.value.toString()
+                dailyLog.date = getTodayDateString()
+                insert(dailyLog)
+                _lastLog.value = getRecentLogFromDatabase()
+            }
+            _eventTweet.value = true
         }
     }
 
@@ -85,6 +107,14 @@ class DailyLoggerViewModel(
      */
     fun updateDailyLog(dailyLog: String) {
         _logMessage.value = dailyLog
+    }
+
+    fun errorToastShown() {
+        _eventEmptyLog.value = false
+    }
+
+    fun tweetCompleted() {
+        _eventTweet.value = false
     }
 
     override fun onCleared() {

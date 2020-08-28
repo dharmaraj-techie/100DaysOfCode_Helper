@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +13,6 @@ import androidx.navigation.ui.NavigationUI
 import com.a100daysofcodehelper.R
 import com.a100daysofcodehelper.dataBase.DailyLogDataBase
 import com.a100daysofcodehelper.databinding.FragmentDailyLogerBinding
-
 
 /**
  * Daily logger Fragment
@@ -46,19 +46,34 @@ class DailyLoggerFragment : Fragment() {
         binding.dailyLoggerViewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.submitButtonPressed.observe(this.viewLifecycleOwner, Observer { isButtonPressed ->
+        viewModel.eventSubmit.observe(this.viewLifecycleOwner, Observer { isButtonPressed ->
+            val logMessage = binding.dailyLogEditTv.text.toString()
             if (isButtonPressed) {
-                val logMessage = binding.dailyLogEditTv.text.toString()
                 viewModel.updateDailyLog(logMessage)
-                tweet(logMessage)
-                binding.dailyLogEditTv.text.clear()
-//            findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
+//          findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
             }
         })
+
+        viewModel.eventEmptyLog.observe(this.viewLifecycleOwner, Observer { isLogEmpty ->
+            if (isLogEmpty) {
+                Toast.makeText(this.context, "EmptyField", Toast.LENGTH_SHORT).show()
+                viewModel.errorToastShown()
+            }
+        })
+
+        viewModel.eventTweet.observe(this.viewLifecycleOwner, Observer { canTweet ->
+            if (canTweet) {
+                tweet()
+                viewModel.tweetCompleted()
+                binding.dailyLogEditTv.text.clear()
+            }
+        })
+
         return binding.root
     }
 
-    private fun tweet(tweetMsg: String) {
+    private fun tweet() {
+        val tweetMsg = binding.dailyLogEditTv.text.toString()
         val tweetUrl =
             ("https://twitter.com/intent/tweet?text=$tweetMsg &hashtags="
                     + "100DaysOfCode")

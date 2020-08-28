@@ -35,7 +35,6 @@ class StrikeViewModel(val database: DailyLogDao) : ViewModel() {
         }
     }
 
-
     fun onAddButtonPressed() {
         _isAddBtnPressed.value = true
     }
