@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="strikeViewModel"
             type="com.a100daysofcodehelper.screen.strike.StrikeViewModel" />
@@ -19,23 +20,24 @@
             app:forwardButtonSrc="@drawable/ic_forward_arrow_right_24"
             app:headerColor="@color/primaryColor"
             app:headerLabelColor="@color/primaryTextColor"
-            app:selectionDisabled="true"
             app:previousButtonSrc="@drawable/ic_previous_arrow_24"
             app:selectionColor="@color/secondaryLightColor"
+            app:selectionDisabled="true"
             app:selectionLabelColor="@color/secondaryTextColor"
-            app:type="many_days_picker"
-            app:setSelectedDates="@{strikeViewModel.selectedDaysList}" />
+            app:setSelectedDates="@{strikeViewModel.selectedDaysList}"
+            app:todayLabelColor="@color/secondaryColor"
+            app:type="many_days_picker" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddBtn"
-            android:src="@drawable/ic_baseline_add_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:onClick="@{()->strikeViewModel.onAddButtonPressed()}"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="@{()->strikeViewModel.onAddButtonPressed()}"
+            android:src="@drawable/ic_baseline_add_24"
             app:backgroundTint="@color/secondaryColor" />
     </FrameLayout>
 </layout>
