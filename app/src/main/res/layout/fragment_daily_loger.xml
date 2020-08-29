@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="dailyLoggerViewModel"
             type="com.a100daysofcodehelper.screen.dailyLogger.DailyLoggerViewModel" />
@@ -58,6 +57,19 @@
                 app:layout_constraintEnd_toEndOf="@+id/daily_log_edit_tv"
                 app:layout_constraintTop_toBottomOf="@+id/daily_log_edit_tv" />
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/todays_log_title_tv">
+
+                <include xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/include"
+                    layout="@layout/daily_log_list_item"
+                    app:dailyLog="@{dailyLoggerViewModel.lastLog}" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/todays_log_title_tv"
@@ -65,33 +77,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:text="Last Log"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
 
-            <TextView
-                android:id="@+id/lastLogDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{dailyLoggerViewModel.lastLog.date}"
-                app:layout_constraintStart_toStartOf="@+id/todays_log_title_tv"
-                app:layout_constraintTop_toBottomOf="@+id/todays_log_title_tv"
-                tools:text="Date" />
 
-            <TextView
-                android:id="@+id/lastLog"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="@{dailyLoggerViewModel.lastLog.log}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/lastLogDate"
-                app:layout_constraintTop_toBottomOf="@+id/lastLogDate"
-                tools:text="Date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

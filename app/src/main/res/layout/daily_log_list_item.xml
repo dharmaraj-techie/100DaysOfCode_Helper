@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="dailyLog"
+            type="com.a100daysofcodehelper.dataBase.DailyLog" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:text="@{dailyLog.date}"
                 android:textColor="@color/secondaryTextColor"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +47,7 @@
                 android:layout_marginEnd="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:text="@{dailyLog.log}"
                 android:textColor="@color/secondaryTextColor"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toStartOf="@+id/dateTV"
