@@ -18,7 +18,7 @@
         android:layout_marginEnd="4dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@{dailyLog.date}"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:text="@{dailyLog.formattedDate()}"
                 android:textColor="@color/secondaryTextColor"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,7 @@
                 android:layout_marginEnd="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:text="@{dailyLog.log}"
                 android:textColor="@color/secondaryTextColor"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"

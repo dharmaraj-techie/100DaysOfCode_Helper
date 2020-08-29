@@ -16,4 +16,8 @@ data class DailyLog(
 
                     @ColumnInfo(name = "date")
                     var date: String = "") {
+
+    fun formattedDate(): String {
+        return date.substring(0, 3) + "\n" + date.substring(4, date.lastIndex)
+    }
 }
