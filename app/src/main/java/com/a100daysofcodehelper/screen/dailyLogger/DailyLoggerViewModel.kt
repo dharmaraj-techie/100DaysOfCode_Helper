@@ -50,7 +50,7 @@ class DailyLoggerViewModel(
     val submitButtonVisibility = Transformations.map(_lastLog) { lastLog ->
         Log.d(
             "DailyLoggerViewModel",
-            "true LastLog date: ${lastLog?.date}  Today's Date: ${getTodayDateString()} \""
+            " ${lastLog?.date != getTodayDateString()} LastLog date: ${lastLog?.date}  Today's Date: ${getTodayDateString()} \""
         )
         lastLog?.date != getTodayDateString()
     }
@@ -79,10 +79,13 @@ class DailyLoggerViewModel(
     }
 
     fun submitPressed() {
+        _eventSubmit.value = true
         val currentLogMessage = _logMessage.value.toString()
         if (currentLogMessage.isBlank()) {
             _eventEmptyLog.value = true
+            Log.d("DailyLoggerViewModel", "called again with the value ${_eventEmptyLog.value}")
             _eventSubmit.value = false
+            _eventTweet.value = false
         } else {
             uiScope.launch {
                 _eventEmptyLog.value = false
