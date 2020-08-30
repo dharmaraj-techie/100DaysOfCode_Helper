@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/dailyLoggerFragment"
         android:name="com.a100daysofcodehelper.screen.dailyLogger.DailyLoggerFragment"
-        android:label="DailyLoggerFragment" >
+        android:label="Daily Logger">
         <action
             android:id="@+id/action_dailyLoggerFragment_to_logFragment"
             app:destination="@id/logFragment" />
@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.a100daysofcodehelper.screen.about.AboutFragment"
-        android:label="fragment_about"
+        android:label="About"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/logFragment"
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/strikeFragment"
         android:name="com.a100daysofcodehelper.screen.strike.StrikeFragment"
-        android:label="StrikeFragment" >
+        android:label="Strikes">
         <action
             android:id="@+id/action_strikeFragment_to_dailyLoggerFragment"
             app:destination="@id/dailyLoggerFragment" />
