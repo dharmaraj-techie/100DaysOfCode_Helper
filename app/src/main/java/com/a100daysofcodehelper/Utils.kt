@@ -32,7 +32,7 @@ suspend fun getListOfDatesFromDb(database : DailyLogDao): List<Calendar>?{
 
         for(dateString in listOfDatesAsString){
             val calendar = Calendar.getInstance()
-            val sdf = SimpleDateFormat("EEE MMM d")
+            val sdf = SimpleDateFormat("EEE, MMM d, ''yy")
             if (!dateString.isNullOrEmpty()) {
                 calendar.time = sdf.parse(dateString)
                 Log.d("StrikeViewModel :", calendar.toString())
@@ -48,7 +48,7 @@ suspend fun getListOfDatesFromDb(database : DailyLogDao): List<Calendar>?{
  * @return Today's date as String
  */
  fun getTodayDateString() =
-    SimpleDateFormat("EEE MMM d").format(Calendar.getInstance().time)
+    SimpleDateFormat("EEE, MMM d, ''yy").format(Calendar.getInstance().time)
 
 
 /**

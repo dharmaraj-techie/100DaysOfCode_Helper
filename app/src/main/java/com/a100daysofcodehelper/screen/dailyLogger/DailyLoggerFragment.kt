@@ -50,7 +50,6 @@ class DailyLoggerFragment : Fragment() {
             val logMessage = binding.dailyLogEditTv.text.toString()
             if (isButtonPressed) {
                 viewModel.updateDailyLog(logMessage)
-                binding.dailyLogEditTv.text.clear()
 //          findNavController().navigate(DailyLoggerFragmentDirections.actionDailyLoggerFragmentToLogFragment(logMessage))
             }
         })
@@ -65,6 +64,7 @@ class DailyLoggerFragment : Fragment() {
         viewModel.eventTweet.observe(this.viewLifecycleOwner, Observer { canTweet ->
             if (canTweet) {
                 tweet()
+                binding.dailyLogEditTv.text.clear()
                 viewModel.tweetCompleted()
             }
         })

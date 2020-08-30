@@ -18,6 +18,6 @@ data class DailyLog(
                     var date: String = "") {
 
     fun formattedDate(): String {
-        return date.substring(0, 3) + "\n" + date.substring(4, date.lastIndex)
+        return date.substring(0, 3) + "\n" + date.substring(5, date.lastIndex - 4)
     }
 }
